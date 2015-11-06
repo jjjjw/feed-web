@@ -1,0 +1,46 @@
+{
+  "name": "txt-web",
+  "version": "0.0.0",
+  "description": "A text only social media site",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjjw/txt-web.git"
+  },
+  "keywords": [
+    "text"
+  ],
+  "author": "JJ Weber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjjw/txt-web/issues"
+  },
+  "homepage": "https://github.com/zjjw/txt-web#readme",
+  "dependencies": {
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.0.1",
+    "babel-plugin-react-transform": "^1.1.1",
+    "babel-runtime": "^6.0.14",
+    "koa": "^1.1.2",
+    "koa-static": "^1.5.2",
+    "nunjucks": "^2.1.0",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "redux": "^3.0.4",
+    "redux-actions": "^0.8.0",
+    "redux-promise": "^0.5.0",
+    "webpack": "^1.12.2",
+    "webpack-hot-middleware": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "redux-devtools": "^2.1.5",
+    "standard": "^5.3.1",
+    "webpack-dev-middleware": "^1.2.0"
+  }
+}
