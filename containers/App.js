@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -19,7 +20,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return {}
+  return  {}
 }
 
 export default connect(

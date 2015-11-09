@@ -4,49 +4,19 @@ var webpack = require('webpack')
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './index.js'
   ],
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'public/js/'),
     filename: 'bundle.js',
-    publicPath: '/js/'
+    publicPath: '/public/js/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.optimize.OccurenceOrderPlugin()
   ],
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/,
-        include: __dirname,
-        query: {
-          optional: [ 'runtime' ],
-          stage: 2,
-          env: {
-            development: {
-              plugins: [
-                'react-transform'
-              ],
-              extra: {
-                'react-transform': {
-                  transforms: [
-                    {
-                      transform:  'react-transform-hmr',
-                      imports: [ 'react' ],
-                      locals:  [ 'module' ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
     ]
   }
 }
