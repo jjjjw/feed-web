@@ -3,5 +3,5 @@ import React from 'react'
 import { Route } from 'react-router'
 
 export default (
-  <Route path='/' component={App}></Route>
-);
+  <Route path='/' component={App}/>
+)

@@ -3,8 +3,7 @@ import routes from '../routes'
 import { createStore, compose } from 'redux'
 import { reduxReactRouter } from 'redux-router'
 
-
-export default function configureStore({ initialState = {}, createHistory }) {
+export default (createHistory, initialState = {}) => {
   const finalCreateStore = compose(
     reduxReactRouter({ routes, createHistory })
   )(createStore)

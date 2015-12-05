@@ -1,7 +1,7 @@
 {
   "name": "txt-web",
   "version": "0.0.0",
-  "description": "A text only social media site",
+  "description": "A text only website",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -15,7 +15,8 @@
     "url": "git+https://github.com/zjjw/txt-web.git"
   },
   "keywords": [
-    "text"
+    "text",
+    "txt"
   ],
   "author": "JJ Weber",
   "license": "ISC",
@@ -33,21 +34,21 @@
     "babel-runtime": "^6.0.14",
     "history": "^1.13.0",
     "koa": "^1.1.2",
+    "koa-less": "0.0.3",
     "koa-static": "^1.5.2",
     "nunjucks": "^2.1.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc4",
     "redux": "^3.0.4",
     "redux-actions": "^0.8.0",
     "redux-promise": "^0.5.0",
     "redux-router": "^1.0.0-beta3",
-    "webpack": "^1.12.2",
-    "webpack-hot-middleware": "^2.4.1"
+    "webpack": "^1.12.2"
   },
   "devDependencies": {
-    "redux-devtools": "^2.1.5",
-    "standard": "^5.3.1",
-    "webpack-dev-middleware": "^1.2.0"
+    "koa-webpack-dev-middleware": "^1.0.1",
+    "standard": "^5.4.1"
   }
 }

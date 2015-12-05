@@ -5,9 +5,7 @@ import React from 'react'
 import Root from './containers/Root'
 import { render } from 'react-dom'
 
-const store = configureStore({
-  createHistory
-})
+const store = configureStore(createHistory, window.__INITIAL_STATE__)
 
 render(
   <Root store={store} />,

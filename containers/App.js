@@ -1,29 +1,19 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        Hello world
-      </div>
-    )
-  }
+function App (props) {
+  return (
+    <div>
+      Hello world
+      {props.children}
+    </div>
+  )
 }
 
-App.propTypes = {}
-
-function mapStateToProps (state) {
-  return {}
+App.propTypes = {
+  children: PropTypes.object
 }
 
-function mapDispatchToProps (dispatch) {
-  return  {}
-}
+export default connect(state => ({
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+}))(App)
