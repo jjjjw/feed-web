@@ -31,9 +31,14 @@ app.use(less('./style', {
 app.use(serve('public/style'))
 
 function * render () {
-  let initialState = {}
+  let initialState = {
+    config: {
+      baseUrl: 'http://localhost:3000'
+    }
+  }
 
   console.log(this.request.path)
+  console.log(this.request.headers.Authorization)
 
   const store = configureStore(
     createHistory,

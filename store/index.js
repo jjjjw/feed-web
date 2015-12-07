@@ -4,11 +4,11 @@ import { createStore, compose } from 'redux'
 import { reduxReactRouter } from 'redux-router'
 
 export default (createHistory, initialState = {}) => {
-  const finalCreateStore = compose(
+  let finalCreateStore = compose(
     reduxReactRouter({ routes, createHistory })
   )(createStore)
 
-  const store = finalCreateStore(rootReducer, initialState)
+  let store = finalCreateStore(rootReducer, initialState)
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
