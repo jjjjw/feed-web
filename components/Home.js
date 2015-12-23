@@ -17,12 +17,10 @@ function Home (props) {
 }
 
 Home.propTypes = {
-  baseUrl: PropTypes.string.isRequired,
   user: PropTypes.object
 }
 
 export default connect(state => ({
-  baseUrl: state.config.baseUrl,
   user: state.user
 }), dispatch => ({
   signup: bindActionCreators(signup, dispatch)

@@ -1,5 +1,6 @@
 import 'babel-polyfill'
-import configureStore from '../store'
+import config from 'config'
+import configureStore from '../store/configureStore'
 import createHistory from 'history/lib/createMemoryHistory'
 import koa from 'koa'
 import less from 'koa-less'
@@ -33,12 +34,15 @@ app.use(serve('public/style'))
 function * render () {
   let initialState = {
     config: {
-      baseUrl: 'http://localhost:3000'
-    }
+      urls: {
+        apiBase: config.get('urls.apiBase'),
+        webBase: config.get('urls.webBase')
+      }
+    },
+    user: null
   }
 
   console.log(this.request.path)
-  console.log(this.request.headers.Authorization)
 
   const store = configureStore(
     createHistory,
@@ -56,6 +60,7 @@ function * render () {
 
 app.use(render)
 
-app.listen(3000)
+app.listen(config.get('koa.port'))
+console.log('App listening on port ' + config.get('koa.port'))
 
 export default app

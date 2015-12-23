@@ -1,36 +1,33 @@
+import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
 
-export default React.createClass({
-  propTypes: {
-    baseUrl: PropTypes.string.isRequired,
-    signup: PropTypes.func.isRequired
-  },
-
-  getInitialState () {
-    return {
+export default class Signup extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
       email: '',
       password: ''
     }
-  },
+  }
 
   handleChange (field) {
     return ev => {
       this.setState({ [field]: ev.target.value })
     }
-  },
+  }
 
   handleSubmit (ev) {
     ev.preventDefault()
     let { email, password } = this.state
-    this.props.signup(this.props.baseUrl, email, password)
-  },
+    this.props.signup(email, password)
+  }
 
   render () {
     return (
       <div className='wrapper'>
         <div className='title'>Sign up</div>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor='email'>Email</label>
 
           <input
@@ -59,10 +56,14 @@ export default React.createClass({
             className='btn'
             type='submit'
            >
-            Sign me up
+            Sign up
           </button>
         </form>
       </div>
     )
   }
-})
+}
+
+Signup.propTypes = {
+  signup: PropTypes.func.isRequired
+}

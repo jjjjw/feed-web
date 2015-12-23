@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import configureStore from './store'
+import configureStore from './store/configureStore'
 import createHistory from 'history/lib/createBrowserHistory'
 import React from 'react'
 import Root from './containers/Root'

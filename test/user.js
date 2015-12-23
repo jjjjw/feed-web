@@ -2,12 +2,16 @@
 
 import configureStore from 'redux-mock-store'
 import nock from 'nock'
-import promise from 'redux-promise'
-import { signup, login, logout } from '../actions/user'
+import thunk from 'redux-thunk'
+import { signup, login, logout, createProfile } from '../actions/user'
 
-const middlewares = [ promise ]
+const apiBase = 'http://test.com'
+const middlewares = [ thunk ]
 const mockStore = configureStore(middlewares)
-const baseUrl = 'http://test.com'
+const storeState = { config: { urls: { apiBase } } }
+const token = 'token'
+const id = 'userId'
+const role = 'user'
 
 describe('user actions', () => {
   afterEach(() => {
@@ -15,47 +19,72 @@ describe('user actions', () => {
   })
 
   it('succesfully signs up a new user', (done) => {
-    nock(baseUrl)
+    nock(apiBase)
       .post('/users', {
         email: 'pizza@gmail.com',
         password: 'pizza'
       })
-      .reply(200)
+      .reply(200, { id, role })
 
-    const action = { type: 'SIGNUP', payload: '' }
-    const expectedActions = [ action ]
+    const signupAction = { type: 'SIGNUP', payload: { id, role } }
+    const pushStateAction = {
+      'type': '@@reduxReactRouter/historyAPI',
+      'payload': {
+        'args': [
+          null,
+          '/profiles/new'
+        ],
+        'method': 'pushState'
+      }
+    }
+    const expectedActions = [ pushStateAction , signupAction ]
 
-    const store = mockStore({}, expectedActions, done)
-    store.dispatch(signup(baseUrl, 'pizza@gmail.com', 'pizza'))
+    const store = mockStore(storeState, expectedActions, done)
+    store.dispatch(signup('pizza@gmail.com', 'pizza'))
   })
 
   it('succesfully logs in a user', (done) => {
-    nock(baseUrl)
+    nock(apiBase)
       .post('/users/login', {
         email: 'pizza@gmail.com',
         password: 'pizza'
       })
-      .reply(200)
+      .reply(200, { id, role })
 
-    const action = { type: 'LOGIN', payload: '' }
+    const action = { type: 'LOGIN', payload: { id, role } }
     const expectedActions = [ action ]
 
-    const store = mockStore({}, expectedActions, done)
-    store.dispatch(login(baseUrl, 'pizza@gmail.com', 'pizza'))
+    const store = mockStore(storeState, expectedActions, done)
+    store.dispatch(login('pizza@gmail.com', 'pizza'))
   })
 
   it('succesfully logs out a user', (done) => {
-    nock(baseUrl)
-      .matchHeader('Authorization', 'pizzaToken')
-      .post('/users/logout')
+    nock(apiBase)
+      .post('/users/logout', {})
       .reply(200)
 
-    const action = { type: 'LOGOUT', payload: '' }
+    const action = { type: 'LOGOUT', payload: undefined }
     const expectedActions = [ action ]
 
-    const store = mockStore({}, expectedActions, done)
-    store.dispatch(logout(baseUrl, {
+    const store = mockStore(storeState, expectedActions, done)
+    store.dispatch(logout({
       token: 'pizzaToken'
     }))
   })
+
+  it('succesfully creates a profile', (done) => {
+    const id = '1'
+    nock(apiBase)
+      .post('/profiles', {
+        name: 'pizza'
+      })
+      .reply(200, { id })
+
+    const action = { type: 'CREATE_PROFILE', payload: { id } }
+    const expectedActions = [ action ]
+
+    const store = mockStore(storeState, expectedActions, done)
+    store.dispatch(createProfile({ name: 'pizza' }))
+  })
+
 })
