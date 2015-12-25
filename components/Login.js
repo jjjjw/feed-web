@@ -1,19 +1,20 @@
-import EmailPasswordInputs from './EmailPasswordInputs'
 import PureComponent from 'react-pure-render/component'
+import EmailPasswordInputs from './EmailPasswordInputs'
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
-export default class Signup extends PureComponent {
+export default class Login extends PureComponent {
 
   handleSubmit (ev) {
     ev.preventDefault()
-    let { email, password } = this.props
-    this.props.signup(email, password)
+    let { email, password, location } = this.props
+    this.props.login(email, password, location)
   }
 
   render () {
     return (
       <div className='wrapper'>
-        <div className='title'>Sign up</div>
+        <div className='title'>Log in</div>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
@@ -22,17 +23,20 @@ export default class Signup extends PureComponent {
           <button
             className='btn'
             type='submit'
-           >
-            Sign up
+            >
+            Login
           </button>
+          <div>
+            <Link to={'/signup'}>Or create an account</Link>
+          </div>
         </form>
       </div>
     )
   }
 }
 
-Signup.propTypes = {
+Login.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
-  signup: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired
 }

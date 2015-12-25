@@ -8,7 +8,7 @@
     "build:dev": "webpack --watch",
     "start": "node start-server.js",
     "start:dev": "nodemon --watch server/index.js start-server.js",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "react-router": "^1.0.0-rc4",
     "redux": "^3.0.4",
     "redux-actions": "^0.8.0",
-    "redux-router": "^1.0.0-beta3",
+    "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.2",
     "superagent": "^1.6.1",
     "webpack": "^1.12.2"

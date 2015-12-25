@@ -2,16 +2,18 @@
 
 import expect from 'expect'
 import React from 'react'
-import Signup from '../components/Signup'
+import Login from '../../components/Login'
 import TestUtils from 'react-addons-test-utils'
 
 function setup () {
   let props = {
-    signup: expect.createSpy()
+    login: expect.createSpy(),
+    setEmail: function () {},
+    setPassword: function () {}
   }
 
   let renderer = TestUtils.createRenderer()
-  renderer.render(<Signup {...props} />)
+  renderer.render(<Login {...props} />)
   let output = renderer.getRenderOutput()
 
   return {
@@ -21,7 +23,7 @@ function setup () {
   }
 }
 
-describe('signup form', () => {
+describe('login form', () => {
   it('renders correctly', () => {
     let { output } = setup()
 
@@ -31,17 +33,17 @@ describe('signup form', () => {
     expect(form.type).toBe('form')
   })
 
-  it('calls signup on submit', () => {
+  it('calls login on submit', () => {
     let { output, props } = setup()
 
     let form = output.props.children[1]
     let ev = { preventDefault: expect.createSpy() }
 
     form.props.onSubmit(ev)
-    expect(props.signup.calls.length).toBe(1)
+    expect(props.login.calls.length).toBe(1)
     expect(ev.preventDefault.calls.length).toBe(1)
     form.props.onSubmit(ev)
-    expect(props.signup.calls.length).toBe(2)
+    expect(props.login.calls.length).toBe(2)
     expect(ev.preventDefault.calls.length).toBe(2)
   })
 })

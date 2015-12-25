@@ -12,6 +12,7 @@ import webpack from 'webpack'
 import webpackConfig from '../webpack.config.js'
 import webpackMiddleware from 'koa-webpack-dev-middleware'
 import { renderToString } from 'react-dom/server'
+import { syncReduxAndRouter } from 'redux-simple-router'
 
 nunjucks.configure('views', { autoescape: true })
 
@@ -39,17 +40,17 @@ function * render () {
         webBase: config.get('urls.webBase')
       }
     },
-    user: null
+    user: {}
   }
 
   console.log(this.request.path)
 
-  const store = configureStore(
-    createHistory,
-    initialState
-  )
+  const history = createHistory()
+  history.push(this.request.path)
+  const store = configureStore(initialState)
+  syncReduxAndRouter(history, store)
 
-  const appString = renderToString(<Root store={store} />)
+  const appString = renderToString(<Root store={store} history={history} />)
 
   this.body = nunjucks.render('index.html', {
     appString,
