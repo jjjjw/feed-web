@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { authHeader } from '../auth'
+import { authorizeRequest } from '../auth'
 import { createAction } from 'redux-actions'
 import { pushPath } from 'redux-simple-router'
 
@@ -21,7 +21,7 @@ export function load (authToken) {
     return new Promise((resolve, reject) => {
       request
         .get(`${baseUrl}/users`)
-        .use(authHeader(authToken))
+        .use(authorizeRequest(authToken))
         .end((err, res) => {
           if (err) {
             resolve()
@@ -43,6 +43,7 @@ export function signup (email, password) {
     request
       .post(`${baseUrl}/users`)
       .send({ email, password })
+      .use(authorizeRequest())
       .end((err, res) => {
         if (err) {
           throw err
@@ -62,6 +63,7 @@ export function login (email, password, location) {
     request
       .post(`${baseUrl}/users/login`)
       .send({ email, password })
+      .use(authorizeRequest())
       .end((err, res) => {
         if (err) {
           throw err
@@ -84,6 +86,7 @@ export function logout () {
     request
       .post(`${baseUrl}/users/logout`)
       .send({})
+      .use(authorizeRequest())
       .end((err, res) => {
         if (err) {
           throw err
@@ -102,6 +105,7 @@ export function createProfile (profile) {
     request
       .post(`${baseUrl}/profiles`)
       .send({ name })
+      .use(authorizeRequest())
       .end((err, res) => {
         if (err) {
           throw err
