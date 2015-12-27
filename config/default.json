@@ -1,4 +1,7 @@
 {
+  "jwt": {
+    "cookie": "token"
+  },
   "koa": {
     "port": 3000
   },

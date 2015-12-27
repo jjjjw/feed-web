@@ -1,11 +1,12 @@
 import DevTools from '../containers/DevTools'
+import promise from 'redux-promise'
 import rootReducer from '../reducers'
 import thunk from 'redux-thunk'
 import { applyMiddleware, createStore, compose } from 'redux'
 
 export default (initialState = {}) => {
   let finalCreateStore = compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, promise),
     DevTools.instrument()
   )(createStore)
 

@@ -3,8 +3,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
 import { requireAuth } from '../auth'
+import { load as loadUser } from '../actions/user'
 
 export default class Home extends React.Component {
+
+  static load (dispatch, authToken) {
+    return dispatch(loadUser(authToken))
+  }
 
   componentWillMount () {
     requireAuth(this.props.user, this.props.location, this.props.pushPath)

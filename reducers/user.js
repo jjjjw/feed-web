@@ -23,6 +23,8 @@ export default handleActions({
     return Object.assign({}, state, { password: action.payload })
   },
 
+  'LOAD': handleAuthenticated,
+
   'SIGNUP': handleAuthenticated,
 
   'LOGIN': handleAuthenticated,

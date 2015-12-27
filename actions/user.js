@@ -1,4 +1,5 @@
 import request from 'superagent'
+import { authHeader } from '../auth'
 import { createAction } from 'redux-actions'
 import { pushPath } from 'redux-simple-router'
 
@@ -8,9 +9,32 @@ const LOGOUT = createAction('LOGOUT')
 const SIGNUP = createAction('SIGNUP')
 const SET_EMAIL = createAction('SET_EMAIL')
 const SET_PASSWORD = createAction('SET_PASSWORD')
+const LOAD = createAction('LOAD')
 
 export const setEmail = SET_EMAIL
 export const setPassword = SET_PASSWORD
+
+export function load (authToken) {
+  return (dispatch, getState) => {
+    let baseUrl = getState().config.urls.apiBase
+
+    return new Promise((resolve, reject) => {
+      request
+        .get(`${baseUrl}/users`)
+        .use(authHeader(authToken))
+        .end((err, res) => {
+          if (err) {
+            resolve()
+          } else if (res.ok) {
+            let { id, role } = res.body
+            let user = { id, role }
+            dispatch(LOAD(user))
+            resolve()
+          }
+        })
+    })
+  }
+}
 
 export function signup (email, password) {
   return (dispatch, getState) => {

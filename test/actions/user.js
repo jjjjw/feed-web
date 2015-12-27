@@ -3,7 +3,7 @@
 import configureStore from 'redux-mock-store'
 import nock from 'nock'
 import thunk from 'redux-thunk'
-import { signup, login, logout, createProfile } from '../../actions/user'
+import { load, signup, login, logout, createProfile } from '../../actions/user'
 
 const apiBase = 'http://test.com'
 const middlewares = [ thunk ]
@@ -46,6 +46,18 @@ describe('user actions', () => {
 
     const store = mockStore(storeState, expectedActions, done)
     store.dispatch(login('pizza@gmail.com', 'pizza', { query: {}}))
+  })
+
+  it('succesfully loads a current user', (done) => {
+    nock(apiBase)
+      .get('/users')
+      .reply(200, { id, role })
+
+    const action = { type: 'LOAD', payload: { id, role } }
+    const expectedActions = [ action ]
+
+    const store = mockStore(storeState, expectedActions, done)
+    store.dispatch(load('pizza@gmail.com', 'pizza', { query: {}}))
   })
 
   it('succesfully logs in a user and redirects', (done) => {
