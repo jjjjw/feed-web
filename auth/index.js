@@ -6,7 +6,6 @@ export function requireAuth (user, location, pushPath) {
   }
 }
 
-
 export function authorizeRequest (token) {
   return request => {
     if (token) {

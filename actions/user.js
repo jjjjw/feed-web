@@ -1,18 +1,15 @@
 import request from 'superagent'
 import { authorizeRequest } from '../auth'
 import { createAction } from 'redux-actions'
+import { loadProfiles, loadUserProfiles } from './profiles'
 import { pushPath } from 'redux-simple-router'
 
-const CREATE_PROFILE = createAction('CREATE_PROFILE')
-const LOGIN = createAction('LOGIN')
-const LOGOUT = createAction('LOGOUT')
-const SIGNUP = createAction('SIGNUP')
-const SET_EMAIL = createAction('SET_EMAIL')
-const SET_PASSWORD = createAction('SET_PASSWORD')
-const LOAD = createAction('LOAD')
-
-export const setEmail = SET_EMAIL
-export const setPassword = SET_PASSWORD
+const ActionCreators = {
+  loadUser: createAction('LOAD_USER'),
+  login: createAction('LOGIN'),
+  logout: createAction('LOGOUT'),
+  signup: createAction('SIGNUP')
+}
 
 export function load (authToken) {
   return (dispatch, getState) => {
@@ -26,9 +23,11 @@ export function load (authToken) {
           if (err) {
             resolve()
           } else if (res.ok) {
-            let { id, role } = res.body
-            let user = { id, role }
-            dispatch(LOAD(user))
+            let user = res.body.user
+            let profiles = res.body.profiles
+            dispatch(ActionCreators.loadUser(user))
+            dispatch(loadProfiles(profiles))
+            dispatch(loadUserProfiles(user))
             resolve()
           }
         })
@@ -48,8 +47,8 @@ export function signup (email, password) {
         if (err) {
           throw err
         } else if (res.ok) {
-          let { id, role } = res.body
-          dispatch(SIGNUP({ id, role }))
+          let user = res.body.user
+          dispatch(ActionCreators.signup(user))
           dispatch(pushPath('/profiles/new'))
         }
       })
@@ -68,9 +67,12 @@ export function login (email, password, location) {
         if (err) {
           throw err
         } else if (res.ok) {
-          let { id, role } = res.body
+          let user = res.body.user
+          let profiles = res.body.profiles
           let { next } = location.query
-          dispatch(LOGIN({ id, role }))
+          dispatch(ActionCreators.login(user))
+          dispatch(loadProfiles(profiles))
+          dispatch(loadUserProfiles(user))
           if (next) {
             dispatch(pushPath(next))
           }
@@ -91,27 +93,7 @@ export function logout () {
         if (err) {
           throw err
         } else if (res.ok) {
-          dispatch(LOGOUT())
-        }
-      })
-  }
-}
-
-export function createProfile (profile) {
-  return (dispatch, getState) => {
-    let baseUrl = getState().config.urls.apiBase
-    let { name } = profile
-
-    request
-      .post(`${baseUrl}/profiles`)
-      .send({ name })
-      .use(authorizeRequest())
-      .end((err, res) => {
-        if (err) {
-          throw err
-        } else if (res.ok) {
-          let { id } = res.body
-          dispatch(CREATE_PROFILE({ id, name }))
+          dispatch(ActionCreators.logout())
         }
       })
   }

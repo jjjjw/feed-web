@@ -23,7 +23,7 @@ describe('user actions', () => {
         email: 'pizza@gmail.com',
         password: 'pizza'
       })
-      .reply(200, { id, role })
+      .reply(200, { user: { id, role }})
 
     const signupAction = { type: 'SIGNUP', payload: { id, role } }
     const pushStateAction = { payload: { avoidRouterUpdate: false, path: '/profiles/new', replace: false, state: undefined }, type: '@@router/UPDATE_PATH' }
@@ -39,10 +39,12 @@ describe('user actions', () => {
         email: 'pizza@gmail.com',
         password: 'pizza'
       })
-      .reply(200, { id, role })
+      .reply(200, { user: { id, role }})
 
-    const action = { type: 'LOGIN', payload: { id, role } }
-    const expectedActions = [ action ]
+    const loginAction = { type: 'LOGIN', payload: { id, role } }
+    const loadProfilesAction = { payload: undefined, type: 'LOAD_PROFILES' }
+    const loadUserProfilesAction = { payload: { id: 'userId', role: 'user' }, type: 'LOAD_USER_PROFILES' }
+    const expectedActions = [ loginAction, loadProfilesAction, loadUserProfilesAction ]
 
     const store = mockStore(storeState, expectedActions, done)
     store.dispatch(login('pizza@gmail.com', 'pizza', { query: {}}))
@@ -51,10 +53,12 @@ describe('user actions', () => {
   it('succesfully loads a current user', (done) => {
     nock(apiBase)
       .get('/users')
-      .reply(200, { id, role })
+      .reply(200, { user: { id, role }})
 
-    const action = { type: 'LOAD', payload: { id, role } }
-    const expectedActions = [ action ]
+    const loadUserAction = { type: 'LOAD_USER', payload: { id, role } }
+    const loadProfilesAction = { payload: undefined, type: 'LOAD_PROFILES' }
+    const loadUserProfilesAction = { payload: { id: 'userId', role: 'user' }, type: 'LOAD_USER_PROFILES' }
+    const expectedActions = [ loadUserAction, loadProfilesAction, loadUserProfilesAction ]
 
     const store = mockStore(storeState, expectedActions, done)
     store.dispatch(load('pizza@gmail.com', 'pizza', { query: {}}))
@@ -66,11 +70,13 @@ describe('user actions', () => {
         email: 'pizza@gmail.com',
         password: 'pizza'
       })
-      .reply(200, { id, role })
+      .reply(200, { user: { id, role }})
 
     const loginAction = { type: 'LOGIN', payload: { id, role } }
+    const loadProfilesAction = { payload: undefined, type: 'LOAD_PROFILES' }
+    const loadUserProfilesAction = { payload: { id: 'userId', role: 'user' }, type: 'LOAD_USER_PROFILES' }
     const pushStateAction = { payload: { avoidRouterUpdate: false, path: '/next', replace: false, state: undefined }, type: '@@router/UPDATE_PATH' }
-    const expectedActions = [ loginAction, pushStateAction ]
+    const expectedActions = [ loginAction, loadProfilesAction, loadUserProfilesAction, pushStateAction ]
 
     const store = mockStore(storeState, expectedActions, done)
     store.dispatch(login('pizza@gmail.com', 'pizza', { query: { next: '/next'}}))
@@ -88,21 +94,5 @@ describe('user actions', () => {
     store.dispatch(logout({
       token: 'pizzaToken'
     }))
-  })
-
-  it('succesfully creates a profile', (done) => {
-    const id = '1'
-    const name = 'pizza'
-    nock(apiBase)
-      .post('/profiles', {
-        name
-      })
-      .reply(200, { id })
-
-    const action = { type: 'CREATE_PROFILE', payload: { id, name } }
-    const expectedActions = [ action ]
-
-    const store = mockStore(storeState, expectedActions, done)
-    store.dispatch(createProfile({ name }))
   })
 })

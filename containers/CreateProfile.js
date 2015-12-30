@@ -1,11 +1,13 @@
+import * as profilesActions from '../actions/profiles'
+import CreateProfileComponent from '../components/CreateProfile'
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { load as loadUser } from '../actions/user'
 import { pushPath } from 'redux-simple-router'
 import { requireAuth } from '../auth'
-import { load as loadUser } from '../actions/user'
 
-export default class Home extends React.Component {
+export default class CreateProfile extends React.Component {
 
   static load (dispatch, authToken) {
     return dispatch(loadUser(authToken))
@@ -17,22 +19,16 @@ export default class Home extends React.Component {
 
   render () {
     return (
-      <div>
-        Home
-      </div>
+      <CreateProfileComponent {...this.props} />
     )
   }
-
-}
-
-Home.propTypes = {
-  location: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  auth: PropTypes.object
 }
 
 export default connect(state => ({
   auth: state.user.auth
-}), dispatch => ({
-  pushPath: bindActionCreators(pushPath, dispatch)
-}))(Home)
+}), dispatch => {
+  return {
+    createProfile: bindActionCreators(profilesActions.createProfile, dispatch),
+    pushPath: bindActionCreators(pushPath, dispatch)
+  }
+})(CreateProfile)

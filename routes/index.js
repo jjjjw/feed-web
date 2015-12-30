@@ -1,4 +1,6 @@
 import App from '../containers/App'
+import CreatePost from '../containers/CreatePost'
+import CreateProfile from '../containers/CreateProfile'
 import Home from '../containers/Home'
 import Login from '../containers/Login'
 import React from 'react'
@@ -10,5 +12,7 @@ export default (
     <IndexRoute component={Home}/>
     <Route path='login' component={Login}/>
     <Route path='signup' component={Signup}/>
+    <Route path='profiles/new' component={CreateProfile}/>
+    <Route path='posts/new' component={CreatePost}/>
   </Route>
 )

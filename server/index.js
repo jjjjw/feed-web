@@ -38,8 +38,6 @@ app.use(less('./style', {
 app.use(serve('public/style'))
 
 function * render () {
-
-
   const [redirectLocation, renderProps] = yield matchRoute({ routes, location: this.request.path })
 
   if (redirectLocation) {

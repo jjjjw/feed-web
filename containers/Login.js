@@ -9,8 +9,6 @@ function Login (props) {
 }
 
 export default connect(state => ({
-  email: state.user.email,
-  password: state.user.password
 }), dispatch => {
   return bindActionCreators(userActions, dispatch)
 })(Login)

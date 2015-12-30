@@ -1,14 +1,33 @@
 import PureComponent from 'react-pure-render/component'
-import EmailPasswordInputs from './EmailPasswordInputs'
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 export default class Login extends PureComponent {
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
+
+  handleEmailChange (ev) {
+    ev.preventDefault()
+    let email = ev.target.value
+    this.setState({ email })
+  }
+
+  handlePasswordChange (ev) {
+    ev.preventDefault()
+    let password = ev.target.value
+    this.setState({ password })
+  }
+
   handleSubmit (ev) {
     ev.preventDefault()
-    let { email, password, location } = this.props
-    this.props.login(email, password, location)
+    let { email, password } = this.state
+    this.props.login(email, password, this.props.location)
   }
 
   render () {
@@ -18,7 +37,29 @@ export default class Login extends PureComponent {
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <EmailPasswordInputs {...this.props} />
+          <label htmlFor='email'>Email</label>
+
+          <input
+            className='input'
+            value={this.state.email}
+            onChange={this.handleEmailChange.bind(this)}
+            id='email'
+            type='email'
+            placeholder='Email'
+            required
+          />
+
+          <label htmlFor='password'>Password</label>
+
+          <input
+            className='input'
+            value={this.state.password}
+            onChange={this.handlePasswordChange.bind(this)}
+            id='password'
+            type='password'
+            placeholder='Password'
+            required
+          />
 
           <button
             className='btn'
@@ -36,7 +77,5 @@ export default class Login extends PureComponent {
 }
 
 Login.propTypes = {
-  email: PropTypes.string,
-  password: PropTypes.string,
   login: PropTypes.func.isRequired
 }
