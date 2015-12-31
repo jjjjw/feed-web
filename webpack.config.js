@@ -1,22 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
-
-module.exports = {
-  devtool: 'inline-source-map',
-  entry: [
-    './index.js'
-  ],
-  output: {
-    path: path.join(__dirname, 'public/js/'),
-    filename: 'bundle.js',
-    publicPath: '/public/js/'
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin()
-  ],
-  module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
-  }
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./webpack.config.prod')
+} else {
+  module.exports = require('./webpack.config.dev')
 }

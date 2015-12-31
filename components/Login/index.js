@@ -1,5 +1,6 @@
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
+import style from './style.css'
 import { Link } from 'react-router'
 
 export default class Login extends PureComponent {
@@ -32,7 +33,7 @@ export default class Login extends PureComponent {
 
   render () {
     return (
-      <div className='wrapper'>
+      <div className={style.wrapper}>
         <div className='title'>Log in</div>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -62,7 +63,7 @@ export default class Login extends PureComponent {
           />
 
           <button
-            className='btn'
+            className={style.action}
             type='submit'
             >
             Login

@@ -7,7 +7,7 @@
     "build": "webpack",
     "build:dev": "webpack --watch",
     "start": "node start-server.js",
-    "start:dev": "nodemon --watch server/index.js start-server.js",
+    "start:dev": "nodemon start-server.js",
     "test": "mocha --recursive --compilers js:babel-core/register"
   },
   "repository": {
@@ -15,8 +15,7 @@
     "url": "git+https://github.com/zjjw/txt-web.git"
   },
   "keywords": [
-    "text",
-    "txt"
+    "parens"
   ],
   "author": "JJ Weber",
   "license": "ISC",
@@ -34,11 +33,15 @@
     "babel-preset-react": "^6.1.2",
     "babel-runtime": "^6.0.14",
     "config": "^1.17.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^0.9.1",
     "history": "^1.13.0",
+    "ignore-styles": "^1.2.0",
     "koa": "^1.1.2",
-    "koa-less": "0.0.3",
     "koa-static": "^1.5.2",
+    "memory-fs": "^0.3.0",
     "nunjucks": "^2.1.0",
+    "postcss-loader": "^0.8.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-pure-render": "^1.0.2",
@@ -49,6 +52,8 @@
     "redux-promise": "^0.5.0",
     "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.2",
+    "rucksack-css": "^0.8.5",
+    "style-loader": "^0.13.0",
     "superagent": "^1.6.1",
     "thunkify": "^2.1.2",
     "webpack": "^1.12.2"
