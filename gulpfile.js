@@ -43,9 +43,6 @@ gulp.task('watch', ['frontend-watch', 'backend-watch'])
 
 gulp.task('start:dev', ['build', 'watch'], () => {
   nodemon({
-    execMap: {
-      js: 'node'
-    },
     script: path.join(__dirname, 'build/server')
   }).on('restart', () => {
     console.log('Restarted!');
