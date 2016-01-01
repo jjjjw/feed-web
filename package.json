@@ -4,11 +4,9 @@
   "description": "A text website",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "build:dev": "webpack --watch",
-    "start": "node start-server.js",
-    "start:dev": "nodemon start-server.js",
-    "test": "mocha --recursive --compilers js:babel-core/register"
+    "start": "gulp build && node ./build/server",
+    "start:dev": "gulp start:dev",
+    "test": "mocha --recursive --compilers js:babel-core/register --require ignore-styles"
   },
   "repository": {
     "type": "git",
@@ -35,6 +33,7 @@
     "config": "^1.17.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^0.9.1",
+    "gulp": "^3.9.0",
     "history": "^1.13.0",
     "ignore-styles": "^1.2.0",
     "koa": "^1.1.2",
@@ -60,7 +59,7 @@
   },
   "devDependencies": {
     "expect": "^1.13.0",
-    "koa-webpack-dev-middleware": "^1.0.1",
+    "ignore-styles": "^1.2.0",
     "mocha": "^2.3.4",
     "nock": "^3.4.0",
     "nodemon": "^1.8.1",

@@ -1,6 +1,6 @@
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
-import style from './style.css'
+import style from '../Form/style.css'
 import { Link } from 'react-router'
 
 export default class Login extends PureComponent {
@@ -34,42 +34,41 @@ export default class Login extends PureComponent {
   render () {
     return (
       <div className={style.wrapper}>
-        <div className='title'>Log in</div>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <label htmlFor='email'>Email</label>
+          <div>
+            <input
+              className={style.input}
+              value={this.state.email}
+              onChange={this.handleEmailChange.bind(this)}
+              id='email'
+              type='email'
+              placeholder='Email'
+              required
+            />
+          </div>
 
-          <input
-            className='input'
-            value={this.state.email}
-            onChange={this.handleEmailChange.bind(this)}
-            id='email'
-            type='email'
-            placeholder='Email'
-            required
-          />
-
-          <label htmlFor='password'>Password</label>
-
-          <input
-            className='input'
-            value={this.state.password}
-            onChange={this.handlePasswordChange.bind(this)}
-            id='password'
-            type='password'
-            placeholder='Password'
-            required
-          />
+          <div>
+            <input
+              className={style.input}
+              value={this.state.password}
+              onChange={this.handlePasswordChange.bind(this)}
+              id='password'
+              type='password'
+              placeholder='Password'
+              required
+            />
+          </div>
 
           <button
-            className={style.action}
+            className={style.submit}
             type='submit'
             >
-            Login
+            Log in
           </button>
-          <div>
-            <Link to={'/signup'}>Or create an account</Link>
+          <div className={style.linkWrapper}>
+            Or <Link to={'/signup'}>sign up</Link>
           </div>
         </form>
       </div>

@@ -4,7 +4,6 @@ const rucksack = require('rucksack-css')
 const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'inline-source-map',
   entry: [
     './index.js'
   ],
@@ -25,9 +24,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          'babel-loader'
-        ]
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,

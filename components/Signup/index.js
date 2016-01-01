@@ -1,5 +1,6 @@
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
+import style from '../Form/style.css'
 
 export default class Signup extends PureComponent {
 
@@ -31,15 +32,12 @@ export default class Signup extends PureComponent {
 
   render () {
     return (
-      <div className='wrapper'>
-        <div className='title'>Sign up</div>
+      <div className={style.wrapper}>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <label htmlFor='email'>Email</label>
-
           <input
-            className='input'
+            className={style.input}
             value={this.state.email}
             onChange={this.handleEmailChange.bind(this)}
             id='email'
@@ -48,10 +46,8 @@ export default class Signup extends PureComponent {
             required
           />
 
-          <label htmlFor='password'>Password</label>
-
           <input
-            className='input'
+            className={style.input}
             value={this.state.password}
             onChange={this.handlePasswordChange.bind(this)}
             id='password'
@@ -61,7 +57,7 @@ export default class Signup extends PureComponent {
           />
 
           <button
-            className='btn'
+            className={style.submit}
             type='submit'
            >
             Sign up

@@ -1,0 +1,26 @@
+.wrapper {
+  margin: 80px auto 0;
+  max-width: 230px;
+}
+
+.input {
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  box-sizing: border-box;
+  margin: 10px 0 0;
+  outline: 0;
+  padding: 4px;
+  width: 100%;
+}
+
+.submit {
+  background-color: #55acee;
+  color: #fff;
+  margin: 10px 0 0;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.linkWrapper {
+  margin: 10px 0 0;
+}

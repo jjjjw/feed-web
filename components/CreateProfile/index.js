@@ -1,5 +1,6 @@
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
+import style from '../Form/style.css'
 
 export default class CreateProfile extends PureComponent {
 
@@ -24,28 +25,25 @@ export default class CreateProfile extends PureComponent {
 
   render () {
     return (
-      <div className='wrapper'>
-        <div className='title'>Create profile</div>
+      <div className={style.wrapper}>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
-          <label htmlFor='name'>Name</label>
-
           <input
-            className='input'
+            className={style.input}
             value={this.props.name}
             onChange={this.handleNameChange.bind(this)}
             id='name'
             type='name'
-            placeholder='Name'
+            placeholder='Username'
             required
           />
 
           <button
-            className='btn'
+            className={style.submit}
             type='submit'
             >
-            Create
+            Create profile
           </button>
         </form>
       </div>

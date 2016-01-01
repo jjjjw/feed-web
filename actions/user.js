@@ -75,6 +75,8 @@ export function login (email, password, location) {
           dispatch(loadUserProfiles(user))
           if (next) {
             dispatch(pushPath(next))
+          } else {
+            dispatch(pushPath('/'))
           }
         }
       })

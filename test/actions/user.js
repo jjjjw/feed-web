@@ -44,7 +44,8 @@ describe('user actions', () => {
     const loginAction = { type: 'LOGIN', payload: { id, role } }
     const loadProfilesAction = { payload: undefined, type: 'LOAD_PROFILES' }
     const loadUserProfilesAction = { payload: { id: 'userId', role: 'user' }, type: 'LOAD_USER_PROFILES' }
-    const expectedActions = [ loginAction, loadProfilesAction, loadUserProfilesAction ]
+    const pushStateAction = { payload: { avoidRouterUpdate: false, path: '/', replace: false, state: undefined }, type: '@@router/UPDATE_PATH' }
+    const expectedActions = [ loginAction, loadProfilesAction, loadUserProfilesAction, pushStateAction ]
 
     const store = mockStore(storeState, expectedActions, done)
     store.dispatch(login('pizza@gmail.com', 'pizza', { query: {}}))

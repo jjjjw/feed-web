@@ -23,7 +23,7 @@ function setup () {
   }
 }
 
-describe('login form', () => {
+describe.skip('login form', () => {
   it('renders correctly', () => {
     let { output } = setup()
 
