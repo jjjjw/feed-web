@@ -14,10 +14,10 @@
 }
 
 .submit {
-  background-color: #55acee;
-  color: #fff;
+  border: 1px solid #e1e8ed;
+  box-sizing: border-box;
   margin: 10px 0 0;
-  padding: 5px 0;
+  padding: 8px 0;
   width: 100%;
 }
 
