@@ -1,3 +1,4 @@
+import ErrorAlert from '../ErrorAlert'
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
 import style from '../Form/style.css'
@@ -13,6 +14,9 @@ export default class CreateProfile extends PureComponent {
 
   handleNameChange (ev) {
     ev.preventDefault()
+    if (this.props.profiles.error) {
+      this.props.clearProfilesError()
+    }
     let name = ev.target.value
     this.setState({ name })
   }
@@ -26,6 +30,8 @@ export default class CreateProfile extends PureComponent {
   render () {
     return (
       <div className={style.wrapper}>
+
+        <ErrorAlert error={this.props.profiles.error} />
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
@@ -52,5 +58,7 @@ export default class CreateProfile extends PureComponent {
 }
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  clearProfilesError: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
+  profiles: PropTypes.object.isRequired
 }

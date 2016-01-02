@@ -31,8 +31,11 @@ body {
   line-height: 1.4em;
   background: #f5f5f5;
   color: #4d4d4d;
+  font-weight: 300;
+}
+
+.wrapper {
   min-width: 230px;
   max-width: 550px;
   margin: 0 auto;
-  font-weight: 300;
 }

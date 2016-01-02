@@ -6,6 +6,12 @@ export function requireAuth (user, location, pushPath) {
   }
 }
 
+export function rejectAuth (user, location, pushPath) {
+  if (user.isAuthenticated) {
+    pushPath(`/`)
+  }
+}
+
 export function authorizeRequest (token) {
   return request => {
     if (token) {

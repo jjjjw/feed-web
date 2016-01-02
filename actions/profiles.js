@@ -4,13 +4,17 @@ import { createAction } from 'redux-actions'
 import { pushPath } from 'redux-simple-router'
 
 const ActionCreators = {
+  clearProfilesError: createAction('CLEAR_PROFILES_ERROR'),
   createProfile: createAction('CREATE_PROFILE'),
   loadProfiles: createAction('LOAD_PROFILES'),
-  loadUserProfiles: createAction('LOAD_USER_PROFILES')
+  loadUserProfiles: createAction('LOAD_USER_PROFILES'),
+  profilesError: createAction('PROFILES_ERROR')
 }
 
+export const clearProfilesError = ActionCreators.clearProfilesError
 export const loadProfiles = ActionCreators.loadProfiles
 export const loadUserProfiles = ActionCreators.loadUserProfiles
+export const profilesError = ActionCreators.profilesError
 
 export function createProfile (profile) {
   return (dispatch, getState) => {
@@ -23,7 +27,8 @@ export function createProfile (profile) {
       .use(authorizeRequest())
       .end((err, res) => {
         if (err) {
-          throw err
+          const { error } = err.response.body
+          dispatch(ActionCreators.profilesError(error))
         } else if (res.ok) {
           let { id } = res.body.profile
           dispatch(ActionCreators.createProfile({ id, name }))

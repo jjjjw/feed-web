@@ -1,3 +1,4 @@
+import ErrorAlert from '../ErrorAlert'
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
 import style from '../Form/style.css'
@@ -33,6 +34,8 @@ export default class Signup extends PureComponent {
   render () {
     return (
       <div className={style.wrapper}>
+
+        <ErrorAlert error={this.props.auth.error} />
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 

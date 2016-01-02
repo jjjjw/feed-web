@@ -53,6 +53,14 @@ const profiles = combineReducers({
 })
 
 const auth = handleActions({
+  'AUTH_ERROR' (state, action) {
+    return { ...state, error: action.payload }
+  },
+
+  'CLEAR_AUTH_ERROR' (state, action) {
+    return { ...state, error: null }
+  },
+
   'LOAD_USER': handleAuthenticated,
 
   'SIGNUP': handleAuthenticated,

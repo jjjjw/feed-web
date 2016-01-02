@@ -9,10 +9,6 @@ import { requireAuth } from '../auth'
 
 export default class CreatePost extends React.Component {
 
-  static load (dispatch, authToken) {
-    return dispatch(loadUser(authToken))
-  }
-
   componentWillMount () {
     requireAuth(this.props.auth, this.props.location, this.props.pushPath)
   }

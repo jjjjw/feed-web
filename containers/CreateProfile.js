@@ -9,10 +9,6 @@ import { requireAuth } from '../auth'
 
 export default class CreateProfile extends React.Component {
 
-  static load (dispatch, authToken) {
-    return dispatch(loadUser(authToken))
-  }
-
   componentWillMount () {
     requireAuth(this.props.auth, this.props.location, this.props.pushPath)
   }
@@ -25,10 +21,10 @@ export default class CreateProfile extends React.Component {
 }
 
 export default connect(state => ({
-  auth: state.user.auth
+  auth: state.user.auth,
+  profiles: state.profiles
 }), dispatch => {
-  return {
-    createProfile: bindActionCreators(profilesActions.createProfile, dispatch),
-    pushPath: bindActionCreators(pushPath, dispatch)
-  }
+  let actions = bindActionCreators(profilesActions, dispatch)
+  actions.pushPath = bindActionCreators(pushPath, dispatch)
+  return actions
 })(CreateProfile)

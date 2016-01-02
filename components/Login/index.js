@@ -1,3 +1,4 @@
+import ErrorAlert from '../ErrorAlert'
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
 import style from '../Form/style.css'
@@ -15,12 +16,18 @@ export default class Login extends PureComponent {
 
   handleEmailChange (ev) {
     ev.preventDefault()
+    if (this.props.auth.error) {
+      this.props.clearAuthError()
+    }
     let email = ev.target.value
     this.setState({ email })
   }
 
   handlePasswordChange (ev) {
     ev.preventDefault()
+    if (this.props.auth.error) {
+      this.props.clearAuthError()
+    }
     let password = ev.target.value
     this.setState({ password })
   }
@@ -34,6 +41,8 @@ export default class Login extends PureComponent {
   render () {
     return (
       <div className={style.wrapper}>
+
+        <ErrorAlert error={this.props.auth.error} />
 
         <form onSubmit={this.handleSubmit.bind(this)}>
 
@@ -77,5 +86,6 @@ export default class Login extends PureComponent {
 }
 
 Login.propTypes = {
+  auth: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired
 }

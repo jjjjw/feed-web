@@ -1,15 +1,11 @@
+import HeaderComponent from '../components/Header'
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
 import { requireAuth } from '../auth'
-import { load as loadUser } from '../actions/user'
 
 export default class Home extends React.Component {
-
-  static load (dispatch, authToken) {
-    return dispatch(loadUser(authToken))
-  }
 
   componentWillMount () {
     requireAuth(this.props.auth, this.props.location, this.props.pushPath)
@@ -18,7 +14,7 @@ export default class Home extends React.Component {
   render () {
     return (
       <div>
-        Home
+        <HeaderComponent {...this.props} />
       </div>
     )
   }
@@ -32,7 +28,8 @@ Home.propTypes = {
 }
 
 export default connect(state => ({
-  auth: state.user.auth
+  auth: state.user.auth,
+  profiles: state.profiles
 }), dispatch => ({
   pushPath: bindActionCreators(pushPath, dispatch)
 }))(Home)

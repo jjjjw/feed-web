@@ -1,0 +1,7 @@
+.wrapper {
+  border-bottom: 1px solid #e1e8ed;
+  box-sizing: border-box;
+  min-height: 80px;
+  position: fixed;
+  width: 100%;
+}
