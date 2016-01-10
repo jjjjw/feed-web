@@ -5,12 +5,12 @@ import thunk from 'redux-thunk'
 import { applyMiddleware, createStore, compose } from 'redux'
 
 export default (initialState = {}) => {
-  let finalCreateStore = compose(
+  const finalCreateStore = compose(
     applyMiddleware(thunk, promise),
     DevTools.instrument()
   )(createStore)
 
-  let store = finalCreateStore(rootReducer, initialState)
+  const store = finalCreateStore(rootReducer, initialState)
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

@@ -1,24 +1,27 @@
 import PureComponent from 'react-pure-render/component'
 import React, { PropTypes } from 'react'
+import style from './style.css'
 
 export default class Editor extends PureComponent {
 
   constructor (props) {
     super(props)
     this.state = {
-      content: ''
+      content: {
+        text: ''
+      }
     }
   }
 
   handleInput (ev) {
     ev.preventDefault()
-    let content = ev.currentTarget.value
-    this.setState({ content })
+    const text = ev.currentTarget.value
+    this.setState({ content: { text } })
   }
 
   handleSubmit (ev) {
     ev.preventDefault()
-    let { content } = this.state
+    const { content } = this.state
     this.props.createPost({
       content
     })
@@ -26,13 +29,17 @@ export default class Editor extends PureComponent {
 
   render () {
     return (
-      <div className='wrapper'>
+      <div className={style.container}>
         <form onSubmit={this.handleSubmit.bind(this)}>
-
-          <textarea
-            onInput={this.handleInput.bind(this)}
-            name='post'
-            value={this.state.content}/>
+          <div>
+            <textarea
+              className={style.textArea}
+              onInput={this.handleInput.bind(this)}
+              maxLength='500'
+              name='post'
+              placeholder='Write here...'
+              value={this.state.content.text}/>
+          </div>
 
           <button
             className='btn'

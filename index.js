@@ -11,7 +11,7 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 const history = createHistory()
 const store = configureStore(window.__INITIAL_STATE__)
 
-let router = <Router history={history}>{routes}</Router>
+const router = <Router history={history}>{routes}</Router>
 
 render(
   <Root store={store} router={router} />, document.getElementById('root')

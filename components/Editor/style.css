@@ -1,0 +1,23 @@
+textarea {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  font: inherit;
+  outline: none;
+  overflow: auto;
+  resize: none;
+}
+
+.container {
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.textArea {
+  height: 150px;
+  margin: 20px 0;
+  width: 100%;
+}

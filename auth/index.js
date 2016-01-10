@@ -1,14 +1,14 @@
 
 export function requireAuth (user, location, pushPath) {
   if (!user.isAuthenticated) {
-    let next = location.pathname
+    const next = location.pathname
     pushPath(`/login?next=${next}`)
   }
 }
 
-export function rejectAuth (user, location, pushPath) {
+export function rejectAuth (user, location, pushPath, next = '/') {
   if (user.isAuthenticated) {
-    pushPath(`/`)
+    pushPath(next)
   }
 }
 

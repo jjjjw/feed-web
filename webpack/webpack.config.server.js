@@ -15,7 +15,7 @@ fs.readdirSync('node_modules')
 
 module.exports = {
   entry: [
-    './server'
+    './server/index.js'
   ],
   target: 'node',
   node: {
@@ -33,7 +33,6 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })

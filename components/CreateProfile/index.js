@@ -17,19 +17,19 @@ export default class CreateProfile extends PureComponent {
     if (this.props.profiles.error) {
       this.props.clearProfilesError()
     }
-    let name = ev.target.value
+    const name = ev.target.value
     this.setState({ name })
   }
 
   handleSubmit (ev) {
     ev.preventDefault()
-    let profile = { name: this.state.name }
+    const profile = { name: this.state.name }
     this.props.createProfile(profile)
   }
 
   render () {
     return (
-      <div className={style.wrapper}>
+      <div className={style.container}>
 
         <ErrorAlert error={this.props.profiles.error} />
 

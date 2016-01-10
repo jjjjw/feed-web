@@ -1,4 +1,4 @@
-import DevTools from './DevTools'
+import DevTools from '../DevTools'
 import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
 

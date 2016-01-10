@@ -14,7 +14,6 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('style.css', {
         allChunks: true
     })

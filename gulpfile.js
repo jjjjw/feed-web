@@ -1,4 +1,3 @@
-const fs = require('fs')
 const gulp = require('gulp')
 const nodemon = require('nodemon')
 const path = require('path')
@@ -44,7 +43,5 @@ gulp.task('watch', ['frontend-watch', 'backend-watch'])
 gulp.task('start:dev', ['build', 'watch'], () => {
   nodemon({
     script: path.join(__dirname, 'build/server')
-  }).on('restart', () => {
-    console.log('Restarted!');
   })
 })

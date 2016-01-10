@@ -18,7 +18,7 @@ const handleAuthenticated = {
 // user_id === user.id
 const all = handleActions({
   'CREATE_PROFILE' (state, action) {
-    let { id } = action.payload
+    const { id } = action.payload
     return [...state, id]
   },
 
@@ -31,7 +31,7 @@ const all = handleActions({
 const active = handleActions({
   'CREATE_PROFILE' (state, action) {
     if (!state) {
-      let { id } = action.payload
+      const { id } = action.payload
       return id
     } else {
       return state

@@ -1,13 +1,13 @@
-import * as postsActions from '../actions/posts'
-import EditorComponent from '../components/Editor'
+import * as profilesActions from '../../actions/profiles'
+import CreateProfileComponent from '../../components/CreateProfile'
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { load as loadUser } from '../actions/user'
+import { load as loadUser } from '../../actions/user'
 import { pushPath } from 'redux-simple-router'
-import { requireAuth } from '../auth'
+import { requireAuth } from '../../auth'
 
-export default class CreatePost extends React.Component {
+export default class CreateProfile extends React.Component {
 
   componentWillMount () {
     requireAuth(this.props.auth, this.props.location, this.props.pushPath)
@@ -15,16 +15,16 @@ export default class CreatePost extends React.Component {
 
   render () {
     return (
-      <EditorComponent {...this.props} />
+      <CreateProfileComponent {...this.props} />
     )
   }
 }
 
 export default connect(state => ({
   auth: state.user.auth,
-  post: state.posts.local
+  profiles: state.profiles
 }), dispatch => {
-  let actions = bindActionCreators(postsActions, dispatch)
+  let actions = bindActionCreators(profilesActions, dispatch)
   actions.pushPath = bindActionCreators(pushPath, dispatch)
   return actions
-})(CreatePost)
+})(CreateProfile)

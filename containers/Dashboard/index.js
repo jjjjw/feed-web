@@ -1,11 +1,11 @@
-import HeaderComponent from '../components/Header'
+import HeaderComponent from '../../components/Header'
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
-import { requireAuth } from '../auth'
+import { requireAuth } from '../../auth'
 
-export default class Home extends React.Component {
+class Dashboard extends React.Component {
 
   componentWillMount () {
     requireAuth(this.props.auth, this.props.location, this.props.pushPath)
@@ -15,21 +15,21 @@ export default class Home extends React.Component {
     return (
       <div>
         <HeaderComponent {...this.props} />
+        {this.props.children}
       </div>
     )
   }
-
 }
 
-Home.propTypes = {
+Dashboard.propTypes = {
+  auth: PropTypes.object,
+  children: PropTypes.object,
   location: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  auth: PropTypes.object
+  pushPath: PropTypes.func.isRequired
 }
 
 export default connect(state => ({
-  auth: state.user.auth,
-  profiles: state.profiles
+  auth: state.user.auth
 }), dispatch => ({
   pushPath: bindActionCreators(pushPath, dispatch)
-}))(Home)
+}))(Dashboard)

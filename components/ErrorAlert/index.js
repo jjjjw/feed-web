@@ -23,12 +23,12 @@ export default class ErrorAlert extends PureComponent {
   render () {
     if (this.props.error) {
       return (
-        <div className={style.wrapper}>
+        <div className={style.container}>
           {getMessage(this.props.error.type)}
         </div>
       )
     } else {
-      return <div className={style.wrapper}/>
+      return <div className={style.container}/>
     }
   }
 }

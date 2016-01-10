@@ -15,25 +15,25 @@ export default class Signup extends PureComponent {
 
   handleEmailChange (ev) {
     ev.preventDefault()
-    let email = ev.target.value
+    const email = ev.target.value
     this.setState({ email })
   }
 
   handlePasswordChange (ev) {
     ev.preventDefault()
-    let password = ev.target.value
+    const password = ev.target.value
     this.setState({ password })
   }
 
   handleSubmit (ev) {
     ev.preventDefault()
-    let { email, password } = this.state
+    const { email, password } = this.state
     this.props.signup(email, password, this.props.location)
   }
 
   render () {
     return (
-      <div className={style.wrapper}>
+      <div className={style.container}>
 
         <ErrorAlert error={this.props.auth.error} />
 

@@ -3,14 +3,14 @@ import { handleActions } from 'redux-actions'
 
 const byId = handleActions({
   'CREATE_POST' (state, action) {
-    let post = action.payload
+    const post = action.payload
     return {...state, [post.id]: post }
   }
 }, {})
 
 const local = handleActions({
   'EDIT_POST' (state, action) {
-    let { contents } = action.payload
+    const { contents } = action.payload
     return {
       ...state,
       contents

@@ -18,8 +18,8 @@ export const profilesError = ActionCreators.profilesError
 
 export function createProfile (profile) {
   return (dispatch, getState) => {
-    let baseUrl = getState().config.urls.apiBase
-    let { name } = profile
+    const baseUrl = getState().config.urls.apiBase
+    const { name } = profile
 
     request
       .post(`${baseUrl}/profiles`)
@@ -30,7 +30,7 @@ export function createProfile (profile) {
           const { error } = err.response.body
           dispatch(ActionCreators.profilesError(error))
         } else if (res.ok) {
-          let { id } = res.body.profile
+          const { id } = res.body.profile
           dispatch(ActionCreators.createProfile({ id, name }))
           dispatch(pushPath('/'))
         }

@@ -33,9 +33,3 @@ body {
   color: #4d4d4d;
   font-weight: 300;
 }
-
-.wrapper {
-  min-width: 230px;
-  max-width: 550px;
-  margin: 0 auto;
-}

@@ -19,7 +19,7 @@ export default class Login extends PureComponent {
     if (this.props.auth.error) {
       this.props.clearAuthError()
     }
-    let email = ev.target.value
+    const email = ev.target.value
     this.setState({ email })
   }
 
@@ -28,19 +28,19 @@ export default class Login extends PureComponent {
     if (this.props.auth.error) {
       this.props.clearAuthError()
     }
-    let password = ev.target.value
+    const password = ev.target.value
     this.setState({ password })
   }
 
   handleSubmit (ev) {
     ev.preventDefault()
-    let { email, password } = this.state
+    const { email, password } = this.state
     this.props.login(email, password, this.props.location)
   }
 
   render () {
     return (
-      <div className={style.wrapper}>
+      <div className={style.container}>
 
         <ErrorAlert error={this.props.auth.error} />
 
@@ -76,7 +76,7 @@ export default class Login extends PureComponent {
             >
             Log in
           </button>
-          <div className={style.linkWrapper}>
+          <div className={style.linkcontainer}>
             Or <Link to={'/signup'}>sign up</Link>
           </div>
         </form>
