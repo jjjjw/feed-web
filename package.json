@@ -1,5 +1,5 @@
 {
-  "name": "txt-web",
+  "name": "feed-web",
   "version": "0.0.0",
   "description": "A text website",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zjjw/txt-web.git"
+    "url": "git+https://github.com/zjjw/feed-web.git"
   },
   "keywords": [
     "parens"
@@ -18,9 +18,9 @@
   "author": "JJ Weber",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zjjw/txt-web/issues"
+    "url": "https://github.com/zjjw/feed-web/issues"
   },
-  "homepage": "https://github.com/zjjw/txt-web#readme",
+  "homepage": "https://github.com/zjjw/feed-web#readme",
   "dependencies": {
     "babel-core": "^6.1.2",
     "babel-loader": "^6.0.1",
