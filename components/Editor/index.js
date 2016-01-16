@@ -7,22 +7,20 @@ export default class Editor extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      content: {
-        text: ''
-      }
+      content: ''
     }
   }
 
   handleInput (ev) {
     ev.preventDefault()
-    const text = ev.currentTarget.value
-    this.setState({ content: { text } })
+    const content = ev.currentTarget.value
+    this.setState({ content })
   }
 
   handleSubmit (ev) {
     ev.preventDefault()
     const { content } = this.state
-    this.props.createPost({
+    this.props.createMaterial({
       content
     })
   }
@@ -35,9 +33,9 @@ export default class Editor extends PureComponent {
             <textarea
               className={style.textArea}
               onInput={this.handleInput.bind(this)}
-              maxLength='500'
+              maxLength='1000'
               name='post'
-              placeholder='Write here...'
+              placeholder='Feed me text...'
               value={this.state.content.text}/>
           </div>
 
@@ -45,7 +43,7 @@ export default class Editor extends PureComponent {
             className='btn'
             type='submit'
             >
-            Publish
+            Feed
           </button>
         </form>
       </div>
@@ -54,7 +52,5 @@ export default class Editor extends PureComponent {
 }
 
 Editor.propTypes = {
-  createPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired,
-  editPost: PropTypes.func.isRequired
+  createMaterial: PropTypes.func.isRequired
 }

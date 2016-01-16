@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 const rucksack = require('rucksack-css')
 const webpack = require('webpack')
@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin('style.css', {
-        allChunks: true
+      allChunks: true
     })
   ],
   module: {

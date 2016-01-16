@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const fs = require('fs')
 const path = require('path')
 const rucksack = require('rucksack-css')
@@ -6,11 +6,11 @@ const webpack = require('webpack')
 
 var nodeModules = {}
 fs.readdirSync('node_modules')
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
+  .filter(function (x) {
+    return ['.bin'].indexOf(x) === -1
   })
-  .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
+  .forEach(function (mod) {
+    nodeModules[mod] = 'commonjs ' + mod
   })
 
 module.exports = {
@@ -24,12 +24,12 @@ module.exports = {
     process: false,
     Buffer: false,
     __filename: false,
-    __dirname: false,
+    __dirname: false
   },
   externals: nodeModules,
   output: {
     path: path.join(__dirname, '../build'),
-    filename: 'server.js',
+    filename: 'server.js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
